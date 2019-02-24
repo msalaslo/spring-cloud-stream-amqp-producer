@@ -1,0 +1,40 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        #The name of the CONSUMER: Defined in the Listener and the queue name prefix
+        ouput1:
+          destination: verisure.device-config.config-service.etx 
+          contentType: application/json           
+      rabbit:
+        bindings:
+            ouput1:
+              producer:
+                routingKeyExpression: '''device-config.config-ack.ima'''
+                #Whether to bind the queue to the destination exchange. Set it to false if you have set up your own infrastructure and have previously created and bound the queue.
+                bindQueue: false
+                #Whether to declare the exchange for the destination.
+                declareExchange: false
+                #the binder to create and configure dead-letter queues (DLQs) (and a dead-letter exchange DLX, as well as routing infrastructure). 
+                autoBindDlq: false              
+                #set requeueRejected to false (the default) so that failed messages are routed to the DLQ, instead of being re-queued.
+                requeueRejected: false
+                #republishToDlq causes the binder to publish a failed message to the DLQ (instead of rejecting it).
+                republishToDlq: true
+                #The name of the Dead Letter Exchange
+                deadLetterExchange: verisure.device-config.config-service.dlx
+
+     
+  # Spring Cloud Sleuth tracing extra fields to propagate (HTTP/Rest and messaging)
+  sleuth:
+    propagation-keys:
+    - installationNumber  
+    
+logging:
+  mdc:
+    installationNumber: installationNumber
+
+http:
+  headers:
+    installationNumber: installationNumber
+       

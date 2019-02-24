@@ -1,0 +1,35 @@
+# Cloud config for dockerized environments.
+spring:
+  profiles: cloud  
+
+  cloud:
+    stream:
+      bindings:
+        #The name of the CONSUMER: Defined in the Listener and the queue name prefix
+        verisure: 
+          #The queue name sufix
+          group: ${RABBIT_IMA_CONFIG_ACK_QUEUE}
+          consumer:
+            #The number of attempts to process the message
+            max-attempts: ${MAX_ATTEMPS_PROCESS_MESSAGE}
+
+      rabbit:
+        bindings:
+            verisure:
+              consumer:
+                deadLetterQueueName: ${RABBIT_IMA_CONFIG_ACK_DLQ}
+                deadLetterExchange: ${RABBIT_IMA_CONFIG_ACK_DLX}
+  rabbitmq:
+    addresses: ${RABBITMQ_ADRESSES}
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
+    virtual-host: ${RABBITMQ_VHOST}     
+       
+feign:
+  url: ${OSB_ENDPOINT_URL}
+  client:
+    config:
+      osbFeignClient:
+        #Logger Level: none, basic, headers, full 
+        loggerLevel: basic
+
