@@ -4,7 +4,7 @@ spring:
       bindings:
         #The name of the CONSUMER: Defined in the Listener and the queue name prefix
         ouput1:
-          destination: verisure.device-config.config-service.etx 
+          destination: verisure.ima
           contentType: application/json           
       rabbit:
         bindings:

@@ -1,30 +1,15 @@
 # Local config for developer environment.
 spring:
   profiles: local
-
-  cloud:
-    stream:
-      bindings:
-        #The name of the CONSUMER: Defined in the Listener and the queue name prefix
-        verisure: 
-          #The queue name sufix
-          group: ima.config-ack
-
-      rabbit:
-        bindings:
-            verisure:
-              consumer:
-                deadLetterQueueName: verisure.ima.config-ack.dlq
-                deadLetterExchange: verisure.device-config.config-service.dlx
   rabbitmq:
 #    addresses: ef102prtrab0v.epi.securitasdirect.local:5672,ef102prtrab0v.epi.securitasdirect.local:5672,ef102prtrab0v.epi.securitasdirect.local:5672
 #    username: device-config-consumer
 #    password: device-config-consumer-ef
 #    virtual-host: device-config   
     addresses: ef102pocmom0v.epi.securitasdirect.local:5672
-    username: integration
-    password: integration
-    virtual-host: vhintegration      
+    username: guest
+    password: guest
+    virtual-host:       
        
 feign:
   url: http://localhost:8081

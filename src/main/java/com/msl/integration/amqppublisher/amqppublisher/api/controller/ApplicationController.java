@@ -42,7 +42,7 @@ public class ApplicationController {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Create an application item")
     public void createAlert(@Valid @RequestBody PublishMessageDTO request) throws IOException{
-        LOGGER.debug("Creating an item: {}", request.toString());
+        LOGGER.info("Creating an item: {}", request.toString());
         applicationService.publishInDeviceConfiguration(request);
     }
     

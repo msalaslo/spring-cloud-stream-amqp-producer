@@ -15,11 +15,11 @@
         </encoder>
     </appender>
 
-    <logger name="com.verisure" level="DEBUG" />
+    <logger name="com.msl" level="DEBUG" />
     <logger name="com.netflix" level="INFO" />
     <logger name="org.springframework" level="INFO" />
 
-    <root level="warn">
+    <root level="INFO">
         <appender-ref ref="CONSOLE" />
     </root>
 
